@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FormControl, InputLabel, Input, Grid, withStyles, Button } from '@material-ui/core';
+
 const styles = theme => ({
     container: {
         display: 'flex',
@@ -12,7 +13,8 @@ const styles = theme => ({
         margin: theme.spacing.unit,
     },
 });
-class Form extends Component {
+
+class Registration extends Component {
     state = {
         name: "",
         email: "",
@@ -25,7 +27,7 @@ class Form extends Component {
     }
 
     handleNumber = val => {
-        if(isNaN(+val) || +val < 0){
+        if (isNaN(+val) || +val < 0) {
             return 0
         }
         return +val
@@ -77,4 +79,4 @@ class Form extends Component {
     }
 }
 
-export default withStyles(styles)(Form);
+export default withStyles(styles)(Registration);
