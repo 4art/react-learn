@@ -21,9 +21,15 @@ class Registration extends Component {
         age: 0,
         password: ""
     }
-    handleChange = e => {
+    saveRegUser = e => {
         e.preventDefault()
-        alert(JSON.stringify(this.state))
+        this.props.store.dispatch({
+            type: 'registration',
+            val: {
+                name: this.state.name,
+                email: this.state.email
+            }
+        })
     }
 
     handleNumber = val => {
@@ -70,7 +76,7 @@ class Registration extends Component {
                     </Grid>
                     <Grid item xs={10}>
                         <FormControl className={classes.formControl}>
-                            <Button variant="contained" color="primary" className={classes.button} onClick={this.handleChange}>Submit</Button>
+                            <Button variant="contained" color="primary" className={classes.button} onClick={this.saveRegUser}>Submit</Button>
                         </FormControl>
                     </Grid>
                 </Grid>

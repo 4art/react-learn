@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link, Menu, MenuItem } from '@material-ui/core';
-import { withRouter } from 'react-router-dom'
+import { Link as DomLink } from 'react-router-dom'
 
 const styles = {
   root: {
@@ -26,6 +26,10 @@ const styles = {
 class MenuBar extends Component {
   state = {
     anchorEl: null,
+    isLoggedIn: false,
+    user: {
+      name: "Gast"
+    }
   };
 
   handleClick = event => {
@@ -35,9 +39,21 @@ class MenuBar extends Component {
   handleClose = () => {
     this.setState({ anchorEl: null });
   };
+
+  componentDidMount = () => {
+    this.props.store.subscribe(this.handleState)
+  }
+  handleState = () => {
+    this.setState({
+      ...this.state,
+      user: this.props.store.getState()
+    })
+  }
+
   render() {
     const { classes } = this.props;
     const { anchorEl } = this.state;
+    console.log(this.props)
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -51,15 +67,16 @@ class MenuBar extends Component {
               open={Boolean(anchorEl)}
               onClose={this.handleClose}
             >
-              <MenuItem onClick={this.handleClose} component={Link} href="/">Home</MenuItem>
-              <MenuItem onClick={this.handleClose} component={Link} href="/registration">Registration</MenuItem>
-              <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+              <MenuItem onClick={this.handleClose} component={DomLink} to="/">Home</MenuItem>
+              <MenuItem onClick={this.handleClose} component={DomLink} to="/login">Login</MenuItem>
+              <MenuItem onClick={this.handleClose} component={DomLink} to="/registration">Registration</MenuItem>
             </Menu>
             <Typography variant="h6" color="inherit" className={classes.grow}>
-              <Link href="/" color="inherit">Home</Link>
+              <Link component={DomLink} to="/" color="inherit">Home</Link>
             </Typography>
-            <Button href="/registration" color="inherit">Registration</Button>
-            <Button href="/login" color="inherit">Login</Button>
+            <h1>{this.state.user.name}</h1>
+            <Button component={DomLink} to="/registration" color="inherit">Registration</Button>
+            <Button component={DomLink} to="/login" color="inherit">Login</Button>
           </Toolbar>
         </AppBar>
       </div>

@@ -1,12 +1,13 @@
 const initialState = {
-    user: {
-        name: "Gast",
-        email: ""
-    }
+    name: "Gast",
+    email: ""
 }
 
 const reducer = (state = initialState, action) => {
-    return state;
+    if (action.type === "registration") {
+        console.log(action.val)
+        return action.val
+    }
 }
 
 export default reducer;
