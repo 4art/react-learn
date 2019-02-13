@@ -70,6 +70,7 @@ class MenuBar extends Component {
               <MenuItem onClick={this.handleClose} component={DomLink} to="/">Home</MenuItem>
               <MenuItem onClick={this.handleClose} component={DomLink} to="/login">Login</MenuItem>
               <MenuItem onClick={this.handleClose} component={DomLink} to="/registration">Registration</MenuItem>
+              <MenuItem onClick={this.handleClose} component={DomLink} to="/order">Order list</MenuItem>
             </Menu>
             <Typography variant="h6" color="inherit" className={classes.grow}>
               <Link component={DomLink} to="/" color="inherit">Home</Link>
